@@ -1,3 +1,5 @@
+import { ExpenseSummary } from './components/ExpenseSummary'
+
 function App() {
   return (
     <div className="min-h-screen bg-background">
@@ -26,8 +28,8 @@ function App() {
 
           {/* Sidebar */}
           <aside className="space-y-6 order-1 lg:order-2">
-            {/* <ExpenseSummary total={totalExpenses} count={expenses.length} />
-            <ExpenseForm onSubmit={handleAddExpense} /> */}
+            <ExpenseSummary total={100} count={1} />
+            {/* <ExpenseForm onSubmit={handleAddExpense} /> */}
             Sidebar
           </aside>
         </div>
