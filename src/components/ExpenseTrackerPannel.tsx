@@ -1,7 +1,13 @@
 import { ExpenseForm } from './ExpenseForm'
+import { ExpenseList } from './ExpenseList'
 import { ExpenseSummary } from './ExpenseSummary'
+import type { Expense } from '@/types/expense'
 
-export function ExpenseTrackerPannel() {
+interface Props {
+  expenses: Expense[]
+}
+
+export function ExpenseTrackerPannel({ expenses }: Props) {
   return (
     <div className="min-h-screen bg-background">
       {/* <Toaster position="top-center" /> */}
@@ -23,7 +29,7 @@ export function ExpenseTrackerPannel() {
               <h2 className="text-lg font-semibold text-foreground mb-4">
                 Recent Expenses
               </h2>
-              {/* <ExpenseList expenses={expenses} onDelete={handleDeleteExpense} /> */}
+              <ExpenseList expenses={expenses} />
             </section>
           </div>
 
