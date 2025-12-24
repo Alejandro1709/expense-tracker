@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { Expense } from '@/types/expense'
 
 type Store = {
@@ -6,7 +7,15 @@ type Store = {
   setExpenses: (expenses: Expense[]) => void
 }
 
-export const useExpenseStore = create<Store>((set) => ({
-  expenses: [],
-  setExpenses: (expenses: Expense[]) => set(() => ({ expenses })),
-}))
+export const useExpenseStore = create<Store>()(
+  persist(
+    (set) => ({
+      expenses: [],
+
+      setExpenses: (expenses) => set({ expenses }),
+    }),
+    {
+      name: 'expenses',
+    }
+  )
+)
