@@ -18,11 +18,17 @@ import {
 import { CalendarIcon, Plus } from 'lucide-react'
 import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
-import { useExpenses } from '@/hooks/useExpenses'
-import { type ExpenseCategory, categoryLabels } from '@/types/expense'
+import {
+  type Expense,
+  type ExpenseCategory,
+  categoryLabels,
+} from '@/types/expense'
 
-export function ExpenseForm() {
-  const { createExpense } = useExpenses()
+interface Props {
+  onCreate: (expense: Expense) => void
+}
+
+export function ExpenseForm({ onCreate }: Props) {
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState<ExpenseCategory>('other')
@@ -33,14 +39,15 @@ export function ExpenseForm() {
 
     if (!amount || !description) return
 
-    const newExpense = {
+    const newExpense: Expense = {
+      id: crypto.randomUUID(),
       amount: +amount,
       description,
       category,
       date,
     }
 
-    createExpense(newExpense)
+    onCreate(newExpense)
 
     setAmount('')
     setDescription('')
