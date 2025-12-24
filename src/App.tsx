@@ -7,9 +7,19 @@ import type { Expense } from './types/expense'
 function App() {
   const [allExpenses, setAllExpenses] = useState<Expense[]>(expenses)
 
+  const handleDeleteExpense = (id: Expense['id']) => {
+    const newExpenses = allExpenses.filter((expense) => expense.id !== id)
+
+    setAllExpenses(newExpenses)
+  }
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <ExpenseTrackerPannel expenses={allExpenses} onSubmit={setAllExpenses} />
+      <ExpenseTrackerPannel
+        expenses={allExpenses}
+        onSubmit={setAllExpenses}
+        onDelete={handleDeleteExpense}
+      />
     </ThemeProvider>
   )
 }

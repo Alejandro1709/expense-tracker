@@ -4,9 +4,10 @@ import { Receipt } from 'lucide-react'
 
 interface ExpenseListProps {
   expenses: Expense[]
+  onDelete: (id: Expense['id']) => void
 }
 
-export function ExpenseList({ expenses }: ExpenseListProps) {
+export function ExpenseList({ expenses, onDelete }: ExpenseListProps) {
   if (expenses.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
@@ -20,7 +21,7 @@ export function ExpenseList({ expenses }: ExpenseListProps) {
   return (
     <div className="space-y-3">
       {expenses.map((expense) => (
-        <ExpenseCard key={expense.id} expense={expense} />
+        <ExpenseCard key={expense.id} expense={expense} onDelete={onDelete} />
       ))}
     </div>
   )

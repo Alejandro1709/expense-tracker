@@ -6,9 +6,10 @@ import type { Expense } from '@/types/expense'
 interface Props {
   expenses: Expense[]
   onSubmit: React.Dispatch<React.SetStateAction<Expense[]>>
+  onDelete: (id: Expense['id']) => void
 }
 
-export function ExpenseTrackerPannel({ expenses, onSubmit }: Props) {
+export function ExpenseTrackerPannel({ expenses, onSubmit, onDelete }: Props) {
   return (
     <div className="min-h-screen bg-background">
       {/* <Toaster position="top-center" /> */}
@@ -30,7 +31,7 @@ export function ExpenseTrackerPannel({ expenses, onSubmit }: Props) {
               <h2 className="text-lg font-semibold text-foreground mb-4">
                 Recent Expenses
               </h2>
-              <ExpenseList expenses={expenses} />
+              <ExpenseList expenses={expenses} onDelete={onDelete} />
             </section>
           </div>
 

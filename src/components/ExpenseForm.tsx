@@ -48,8 +48,6 @@ export function ExpenseForm({ expenses, onSubmit }: Props) {
       date,
     }
 
-    console.log(newExpense)
-
     onSubmit([...expenses, newExpense])
 
     setAmount('')
