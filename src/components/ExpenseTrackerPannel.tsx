@@ -3,6 +3,7 @@ import { ExpenseList } from '@/components/ExpenseList'
 import { ExpenseSummary } from '@/components/ExpenseSummary'
 import { useExpenseStore } from '@/stores/useExpenseStore'
 import type { Expense } from '@/types/expense'
+import { ThemeToggler } from './ThemeToggler'
 
 export function ExpenseTrackerPannel() {
   const expenses = useExpenseStore((state) => state.expenses)
@@ -27,13 +28,19 @@ export function ExpenseTrackerPannel() {
     <div className="min-h-screen bg-background">
       <div className="container max-w-4xl mx-auto py-8 px-4 sm:py-12">
         {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground">
-            Expense Tracker
-          </h1>
-          <p className="text-muted-foreground mt-1">
-            Keep track of your spending habits
-          </p>
+        <header className="flex flex-row justify-between items-center mb-8">
+          <div className="flex flex-col">
+            <h1 className="text-3xl font-bold text-foreground">
+              Expense Tracker
+            </h1>
+            <p className="text-muted-foreground mt-1">
+              Keep track of your spending habits
+            </p>
+          </div>
+
+          <div className="flex flex-row">
+            <ThemeToggler />
+          </div>
         </header>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
