@@ -23,7 +23,7 @@ export function ExpenseList({ onDelete }: ExpenseListProps) {
   return (
     <div className="space-y-3">
       {expenses.map((expense) => (
-        <ExpenseCard key={expense.id} expense={expense} />
+        <ExpenseCard key={expense.id} expense={expense} onDelete={onDelete} />
       ))}
     </div>
   )
