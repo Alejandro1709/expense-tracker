@@ -1,15 +1,22 @@
+import { useState } from 'react'
 import { ExpenseForm } from '@/components/ExpenseForm'
 import { ExpenseList } from '@/components/ExpenseList'
 import { ExpenseSummary } from '@/components/ExpenseSummary'
 import type { Expense } from '@/types/expense'
 
-interface Props {
-  expenses: Expense[]
-  onSubmit: React.Dispatch<React.SetStateAction<Expense[]>>
-  onDelete: (id: Expense['id']) => void
-}
+export function ExpenseTrackerPannel() {
+  const [expenses, setExpenses] = useState<Expense[]>([])
 
-export function ExpenseTrackerPannel({ expenses, onSubmit, onDelete }: Props) {
+  const handleCreateExpense = (expense: Expense) => {
+    setExpenses([...expenses, expense])
+  }
+
+  const handleDeleteExpense = (id: Expense['id']) => {
+    const newExpenses = expenses.filter((expense) => expense.id !== id)
+
+    setExpenses(newExpenses)
+  }
+
   const totalExpense = expenses.reduce(
     (acc, expense) => acc + expense.amount,
     0
@@ -36,14 +43,14 @@ export function ExpenseTrackerPannel({ expenses, onSubmit, onDelete }: Props) {
               <h2 className="text-lg font-semibold text-foreground mb-4">
                 Recent Expenses
               </h2>
-              <ExpenseList expenses={expenses} onDelete={onDelete} />
+              <ExpenseList expenses={expenses} onDelete={handleDeleteExpense} />
             </section>
           </div>
 
           {/* Sidebar */}
           <aside className="space-y-6 order-1 lg:order-2">
             <ExpenseSummary total={totalExpense} count={expenses.length} />
-            <ExpenseForm expenses={expenses} onSubmit={onSubmit} />
+            <ExpenseForm onCreate={handleCreateExpense} />
           </aside>
         </div>
       </div>

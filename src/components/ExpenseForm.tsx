@@ -25,11 +25,10 @@ import {
 } from '@/types/expense'
 
 interface Props {
-  expenses: Expense[]
-  onSubmit: React.Dispatch<React.SetStateAction<Expense[]>>
+  onCreate: (expense: Expense) => void
 }
 
-export function ExpenseForm({ expenses, onSubmit }: Props) {
+export function ExpenseForm({ onCreate }: Props) {
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState<ExpenseCategory>('other')
@@ -41,14 +40,14 @@ export function ExpenseForm({ expenses, onSubmit }: Props) {
     if (!amount || !description) return
 
     const newExpense: Expense = {
-      id: '4',
+      id: crypto.randomUUID(),
       amount: +amount,
       description,
       category,
       date,
     }
 
-    onSubmit([...expenses, newExpense])
+    onCreate(newExpense)
 
     setAmount('')
     setDescription('')
