@@ -1,13 +1,10 @@
-import { type Expense } from '@/types/expense'
 import { ExpenseCard } from '@/components/ExpenseCard'
 import { Receipt } from 'lucide-react'
+import { useExpenses } from '@/hooks/useExpenses'
 
-interface ExpenseListProps {
-  expenses: Expense[]
-  onDelete: (id: Expense['id']) => void
-}
+export function ExpenseList() {
+  const { expenses } = useExpenses()
 
-export function ExpenseList({ expenses, onDelete }: ExpenseListProps) {
   if (expenses.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
@@ -21,7 +18,7 @@ export function ExpenseList({ expenses, onDelete }: ExpenseListProps) {
   return (
     <div className="space-y-3">
       {expenses.map((expense) => (
-        <ExpenseCard key={expense.id} expense={expense} onDelete={onDelete} />
+        <ExpenseCard key={expense.id} expense={expense} />
       ))}
     </div>
   )

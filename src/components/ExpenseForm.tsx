@@ -18,18 +18,11 @@ import {
 import { CalendarIcon, Plus } from 'lucide-react'
 import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
-import {
-  type Expense,
-  type ExpenseCategory,
-  categoryLabels,
-} from '@/types/expense'
+import { useExpenses } from '@/hooks/useExpenses'
+import { type ExpenseCategory, categoryLabels } from '@/types/expense'
 
-interface Props {
-  expenses: Expense[]
-  onSubmit: React.Dispatch<React.SetStateAction<Expense[]>>
-}
-
-export function ExpenseForm({ expenses, onSubmit }: Props) {
+export function ExpenseForm() {
+  const { createExpense } = useExpenses()
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState<ExpenseCategory>('other')
@@ -40,15 +33,14 @@ export function ExpenseForm({ expenses, onSubmit }: Props) {
 
     if (!amount || !description) return
 
-    const newExpense: Expense = {
-      id: '4',
+    const newExpense = {
       amount: +amount,
       description,
       category,
       date,
     }
 
-    onSubmit([...expenses, newExpense])
+    createExpense(newExpense)
 
     setAmount('')
     setDescription('')
@@ -134,6 +126,8 @@ export function ExpenseForm({ expenses, onSubmit }: Props) {
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
+                selected={date}
+                onSelect={(d) => d && setDate(d)}
                 autoFocus
                 className="pointer-events-auto"
               />
