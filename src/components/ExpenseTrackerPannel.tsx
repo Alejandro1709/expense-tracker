@@ -10,6 +10,11 @@ interface Props {
 }
 
 export function ExpenseTrackerPannel({ expenses, onSubmit, onDelete }: Props) {
+  const totalExpense = expenses.reduce(
+    (acc, expense) => acc + expense.amount,
+    0
+  )
+
   return (
     <div className="min-h-screen bg-background">
       {/* <Toaster position="top-center" /> */}
@@ -37,7 +42,7 @@ export function ExpenseTrackerPannel({ expenses, onSubmit, onDelete }: Props) {
 
           {/* Sidebar */}
           <aside className="space-y-6 order-1 lg:order-2">
-            <ExpenseSummary total={100} count={1} />
+            <ExpenseSummary total={totalExpense} count={expenses.length} />
             <ExpenseForm expenses={expenses} onSubmit={onSubmit} />
           </aside>
         </div>
