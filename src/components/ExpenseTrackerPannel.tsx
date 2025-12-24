@@ -5,9 +5,10 @@ import type { Expense } from '@/types/expense'
 
 interface Props {
   expenses: Expense[]
+  onSubmit: React.Dispatch<React.SetStateAction<Expense[]>>
 }
 
-export function ExpenseTrackerPannel({ expenses }: Props) {
+export function ExpenseTrackerPannel({ expenses, onSubmit }: Props) {
   return (
     <div className="min-h-screen bg-background">
       {/* <Toaster position="top-center" /> */}
@@ -36,7 +37,7 @@ export function ExpenseTrackerPannel({ expenses }: Props) {
           {/* Sidebar */}
           <aside className="space-y-6 order-1 lg:order-2">
             <ExpenseSummary total={100} count={1} />
-            <ExpenseForm />
+            <ExpenseForm expenses={expenses} onSubmit={onSubmit} />
           </aside>
         </div>
       </div>

@@ -9,7 +9,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <ExpenseTrackerPannel expenses={allExpenses} />
+      <ExpenseTrackerPannel expenses={allExpenses} onSubmit={setAllExpenses} />
     </ThemeProvider>
   )
 }
