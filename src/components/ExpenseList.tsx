@@ -1,13 +1,15 @@
 import { type Expense } from '@/types/expense'
 import { ExpenseCard } from '@/components/ExpenseCard'
 import { Receipt } from 'lucide-react'
+import { useExpenseStore } from '@/stores/useExpenseStore'
 
 interface ExpenseListProps {
-  expenses: Expense[]
   onDelete: (id: Expense['id']) => void
 }
 
-export function ExpenseList({ expenses, onDelete }: ExpenseListProps) {
+export function ExpenseList({ onDelete }: ExpenseListProps) {
+  const expenses = useExpenseStore((state) => state.expenses)
+
   if (expenses.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">

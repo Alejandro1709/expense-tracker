@@ -1,11 +1,12 @@
-import { useState } from 'react'
 import { ExpenseForm } from '@/components/ExpenseForm'
 import { ExpenseList } from '@/components/ExpenseList'
 import { ExpenseSummary } from '@/components/ExpenseSummary'
+import { useExpenseStore } from '@/stores/useExpenseStore'
 import type { Expense } from '@/types/expense'
 
 export function ExpenseTrackerPannel() {
-  const [expenses, setExpenses] = useState<Expense[]>([])
+  const expenses = useExpenseStore((state) => state.expenses)
+  const setExpenses = useExpenseStore((state) => state.setExpenses)
 
   const handleCreateExpense = (expense: Expense) => {
     setExpenses([...expenses, expense])
@@ -24,7 +25,6 @@ export function ExpenseTrackerPannel() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* <Toaster position="top-center" /> */}
       <div className="container max-w-4xl mx-auto py-8 px-4 sm:py-12">
         {/* Header */}
         <header className="mb-8">
@@ -43,7 +43,7 @@ export function ExpenseTrackerPannel() {
               <h2 className="text-lg font-semibold text-foreground mb-4">
                 Recent Expenses
               </h2>
-              <ExpenseList expenses={expenses} onDelete={handleDeleteExpense} />
+              <ExpenseList onDelete={handleDeleteExpense} />
             </section>
           </div>
 
