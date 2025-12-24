@@ -18,9 +18,18 @@ import {
 import { CalendarIcon, Plus } from 'lucide-react'
 import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
-import { type ExpenseCategory, categoryLabels } from '@/types/expense'
+import {
+  type Expense,
+  type ExpenseCategory,
+  categoryLabels,
+} from '@/types/expense'
 
-export function ExpenseForm() {
+interface Props {
+  expenses: Expense[]
+  onSubmit: React.Dispatch<React.SetStateAction<Expense[]>>
+}
+
+export function ExpenseForm({ expenses, onSubmit }: Props) {
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState<ExpenseCategory>('other')
@@ -28,14 +37,18 @@ export function ExpenseForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
     if (!amount || !description) return
 
-    // onSubmit({
-    //   amount: parseFloat(amount),
-    //   description,
-    //   category,
-    //   date,
-    // });
+    const newExpense: Expense = {
+      id: '4',
+      amount: +amount,
+      description,
+      category,
+      date,
+    }
+
+    onSubmit([...expenses, newExpense])
 
     setAmount('')
     setDescription('')

@@ -1,7 +1,20 @@
-import { ExpenseForm } from './ExpenseForm'
-import { ExpenseSummary } from './ExpenseSummary'
+import { ExpenseForm } from '@/components/ExpenseForm'
+import { ExpenseList } from '@/components/ExpenseList'
+import { ExpenseSummary } from '@/components/ExpenseSummary'
+import type { Expense } from '@/types/expense'
 
-export function ExpenseTrackerPannel() {
+interface Props {
+  expenses: Expense[]
+  onSubmit: React.Dispatch<React.SetStateAction<Expense[]>>
+  onDelete: (id: Expense['id']) => void
+}
+
+export function ExpenseTrackerPannel({ expenses, onSubmit, onDelete }: Props) {
+  const totalExpense = expenses.reduce(
+    (acc, expense) => acc + expense.amount,
+    0
+  )
+
   return (
     <div className="min-h-screen bg-background">
       {/* <Toaster position="top-center" /> */}
@@ -23,14 +36,14 @@ export function ExpenseTrackerPannel() {
               <h2 className="text-lg font-semibold text-foreground mb-4">
                 Recent Expenses
               </h2>
-              {/* <ExpenseList expenses={expenses} onDelete={handleDeleteExpense} /> */}
+              <ExpenseList expenses={expenses} onDelete={onDelete} />
             </section>
           </div>
 
           {/* Sidebar */}
           <aside className="space-y-6 order-1 lg:order-2">
-            <ExpenseSummary total={100} count={1} />
-            <ExpenseForm />
+            <ExpenseSummary total={totalExpense} count={expenses.length} />
+            <ExpenseForm expenses={expenses} onSubmit={onSubmit} />
           </aside>
         </div>
       </div>
