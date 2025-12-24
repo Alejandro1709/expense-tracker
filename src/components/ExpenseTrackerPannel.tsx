@@ -1,6 +1,6 @@
-import { ExpenseForm } from './ExpenseForm'
-import { ExpenseList } from './ExpenseList'
-import { ExpenseSummary } from './ExpenseSummary'
+import { ExpenseForm } from '@/components/ExpenseForm'
+import { ExpenseList } from '@/components/ExpenseList'
+import { ExpenseSummary } from '@/components/ExpenseSummary'
 import type { Expense } from '@/types/expense'
 
 interface Props {

@@ -1,5 +1,5 @@
 import { type Expense } from '@/types/expense'
-import { ExpenseCard } from './ExpenseCard'
+import { ExpenseCard } from '@/components/ExpenseCard'
 import { Receipt } from 'lucide-react'
 
 interface ExpenseListProps {

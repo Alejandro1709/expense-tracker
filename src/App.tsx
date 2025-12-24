@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { ExpenseTrackerPannel } from '@/components/ExpenseTrackerPannel'
-import expenses from './data/expenses'
-import type { Expense } from './types/expense'
+import expenses from '@/data/expenses'
+import type { Expense } from '@/types/expense'
 
 function App() {
   const [allExpenses, setAllExpenses] = useState<Expense[]>(expenses)
