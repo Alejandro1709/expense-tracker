@@ -134,6 +134,8 @@ export function ExpenseForm({ expenses, onSubmit }: Props) {
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
+                selected={date}
+                onSelect={(d) => d && setDate(d)}
                 autoFocus
                 className="pointer-events-auto"
               />
